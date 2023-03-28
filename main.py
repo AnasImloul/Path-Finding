@@ -50,18 +50,24 @@ def find_arrivee(img):
     except:
         return None
 
+def solve(img):
+    grid = image_to_grid(img)
+    graph = grid_to_graph(grid)
 
-path = r"C:\Users\user\Downloads\test.png"
+    depart = find_depart(img)
+    arrivee = find_arrivee(img)
+
+    path = graph.a_star(depart, arrivee)
+
+    print(graph.cost(path))
+    draw_path(img, path)
+
+
+#get image path from command line
+
+import sys
+
+path = sys.argv[1]
 
 img = cv2.imread(path)
-
-grid = image_to_grid(img)
-graph = grid_to_graph(grid)
-
-
-depart = find_depart(img)
-arrivee = find_arrivee(img)
-
-
-path = graph.a_star(depart, arrivee)
-draw_path(img, path)
+solve(img)
