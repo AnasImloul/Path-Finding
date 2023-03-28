@@ -151,10 +151,7 @@ class Graph:
             end = parent[end]
 
         path.reverse()
-
         return path
 
     def cost(self, path):
-        return sum(self.nodes[path[i]].distance(self.nodes[path[i + 1]]) for i in range(len(path) - 1))
-
-
+        return sum(path[i].distance(path[i + 1]) for i in range(len(path) - 1))
